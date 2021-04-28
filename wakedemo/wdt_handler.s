@@ -19,6 +19,7 @@ WDT:
 ; elim ap -> fp       26
 ; elim fp -> sp       0
 ; saved regs: R4 R5 R6 R7 R8 R9 R10 R11 R12 R13 R14 R15
+	;PUSHED R0  (Program Counter) and R2 (Status Register)
 	; start of prologue
 	PUSH	R15
 	PUSH	R14

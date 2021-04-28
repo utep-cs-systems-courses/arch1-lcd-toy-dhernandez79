@@ -67,6 +67,8 @@ void fillTriangle(u_char colMin, u_char rowMin, u_char width, u_char height, u_i
 
 void drawTurtle(u_char ofc, u_char ofr);
 
+void drawTree();
+
 #endif // included
 
 

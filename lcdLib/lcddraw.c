@@ -175,3 +175,36 @@ void drawTurtle(u_char ofc, u_char ofr) {
     row++;
   }
 }//end turtle
+
+  void drawTree() {
+    u_char row;
+    u_char col;
+    u_char middle;
+
+    for (row = 0; row <= 10; row++) {
+      for (col=0; col<= row; col++) {
+	drawPixel(middle+col+55, row+60, COLOR_GREEN);
+	drawPixel(middle-col+55, row+60, COLOR_GREEN);
+      }
+    }
+    //middle
+    for(row = 0; row <= 20; row++){
+      for(col = 0; col <= row; col++){
+	drawPixel(middle+col+55, row+65, COLOR_GREEN);
+	drawPixel(middle-col+55, row+65, COLOR_GREEN);
+      }
+    }
+    //bottom
+    for(row = 0; row <= 30; row++){
+      for(col = 0; col <= row; col++){
+	drawPixel(middle+col+55, row+73, COLOR_GREEN);
+	drawPixel(middle-col+55, row+73, COLOR_GREEN);
+      }
+    }
+    //bark
+    for(row = 0; row <= 10; row++){
+      for(col = 0; col <= 10; col++){
+	drawPixel(col+60, row+104, COLOR_BROWN);
+      }
+    }
+  }//end tree
