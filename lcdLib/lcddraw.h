@@ -44,12 +44,14 @@ void clearScreen(u_int colorBGR);
 void drawString5x7(u_char col, u_char row, char *string, 
 		   u_int fgColorBGR, u_int bgColorBGR);
 
+void drawString11x16(u_char col, u_char row, char *string, u_int fgColorBGR, u_int bgColorBGR);
 /** 5x7 font - this function draws background pixels
  *  Adapted from RobG's EduKit
  */
 void drawChar5x7(u_char col, u_char row, char c, 
 		 u_int fgColorBGR, u_int bgColorBGR);
 
+void drawChar11x16(u_char col, u_char row, char c, u_int fgColorBGR, u_int bgColorBGR);
 /** Draw rectangle outline
  *  
  *  \param colMin Column start
@@ -60,6 +62,11 @@ void drawChar5x7(u_char col, u_char row, char c,
  */
 void drawRectOutline(u_char colMin, u_char rowMin, u_char width, u_char height,
 		     u_int colorBGR);
+
+void fillTriangle(u_char colMin, u_char rowMin, u_char width, u_char height, u_int colorBGR);
+
+void drawTurtle(u_char ofc, u_char ofr);
+
 #endif // included
 
 

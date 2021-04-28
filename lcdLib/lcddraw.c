@@ -71,6 +71,25 @@ void drawChar5x7(u_char rcol, u_char rrow, char c,
     row++;
   }
 }
+//draw char 11x16
+void drawChar11x16(u_char rcol, u_char rrow, char c, u_int fgColorBGR, u_int bgColorBGR) {
+  u_char col = 0;
+  u_char row = 0;
+  u_int bit = 0x0001; //Changed from u_char to u_int
+  u_char oc = c - 0x20;
+
+  lcd_setArea(rcol, rrow, rcol+10, rrow+16); /*relatize to requested col/row*/
+  while (row < 17) {
+    while (col < 11) {
+      u_int colorBGR = (font_11x16[oc][col] & bit) ? fgColorBGR : bgColorBGR;
+      lcd_writeColor(colorBGR);
+      col++;
+    }
+    col = 0;
+    bit <<= 1;
+    row++;
+  }
+}//end draw Char
 
 /** Draw string at col,row
  *  Type:
@@ -94,6 +113,14 @@ void drawString5x7(u_char col, u_char row, char *string,
   }
 }
 
+void drawString11x16(u_char col, u_char row, char *string, u_int fgColorBGR, u_int bgColorBGR) {
+  u_char cols = col;
+  while (*string) {
+    drawChar11x16(cols, row, *string++, fgColorBGR, bgColorBGR);
+    cols += 12;
+  }
+}//end drawString11x16
+
 
 /** Draw rectangle outline
  *  
@@ -115,3 +142,36 @@ void drawRectOutline(u_char colMin, u_char rowMin, u_char width, u_char height,
   fillRectangle(colMin + width, rowMin, 1, height, colorBGR);
 }
 
+void fillTriangle(u_char colMin, u_char rowMin, u_char width, u_char height, u_int colorBGR) {
+  u_char colLimit = colMin + width, rowLimit = rowMin + height;
+  lcd_setArea(colMin, rowMin, colLimit - 1, rowLimit - 1);
+  u_int total = width * height;
+  u_int c = 0;
+  while ((c++) < total) {
+    lcd_writeColor(colorBGR);
+  }
+}
+
+void drawTurtle(u_char ofc, u_char ofr) {
+  u_char col = 0;
+  u_char row = 0;
+  while (row < 16) {
+    col = 0;
+    while (col < 16) {
+      if (turtle[row][col] == 0) {
+	drawPixel(col+ofc, row+ofr, COLOR_WHITE);
+      }
+      else if (turtle[row][col] == 1) {
+	drawPixel(col+ofc, row+ofr, COLOR_DARK_GREEN);
+      }
+      else if (turtle[row][col] == 2) {
+	drawPixel(col+ofc, row+ofr, COLOR_SPRING_GREEN);
+      }
+      else if (turtle[row][col] == 3) {
+	drawPixel(col+ofc, row+ofr, COLOR_BLACK);
+      }
+      col++;
+    }
+    row++;
+  }
+}//end turtle
