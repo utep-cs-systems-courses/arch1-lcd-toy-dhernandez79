@@ -63,11 +63,15 @@ void drawChar11x16(u_char col, u_char row, char c, u_int fgColorBGR, u_int bgCol
 void drawRectOutline(u_char colMin, u_char rowMin, u_char width, u_char height,
 		     u_int colorBGR);
 
+void drawTopTri(u_char row, u_char col);
+
 void fillTriangle(u_char colMin, u_char rowMin, u_char width, u_char height, u_int colorBGR);
 
 void drawTurtle(u_char ofc, u_char ofr);
 
-void drawTree();
+void redrawTurtle(u_char ofc, u_char ofr);
+
+void drawTree(u_char off_row, u_char off_col);
 
 #endif // included
 

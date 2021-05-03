@@ -22,10 +22,10 @@ void wdt_c_handler()
   dsecCount++;
   if (secCount == 250) {		/* once/sec */
     secCount = 0;
-    fontFgColor = (fontFgColor == COLOR_GREEN) ? COLOR_BLACK : COLOR_GREEN;
+    //fontFgColor = (fontFgColor == COLOR_GREEN) ? COLOR_BLACK : COLOR_GREEN;
     redrawScreen = 1;
   }
-  if (dsecCount == 25) {
+  if (dsecCount == 50) {
     dsecCount = 0;
     nextShapeCol += shapeVelocity;
     if (nextShapeCol >= 100 || nextShapeCol <= 60) {
@@ -52,7 +52,9 @@ void main()
     if (redrawScreen) { //we redraw screen if needed
       redrawScreen = 0;
       // drawString5x7(20,20, "hello", fontFgColor, COLOR_BLUE);
-      drawTurtle(20,20);
+      redrawTurtle(20,shapeCol);
+      drawTurtle(20,nextShapeCol);
+      //drawTree(10,shapeCol);
       shapeCol = nextShapeCol;
     }
     P1OUT &= ~LED_GREEN;	/* green off */

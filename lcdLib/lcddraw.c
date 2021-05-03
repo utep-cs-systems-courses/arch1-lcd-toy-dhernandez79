@@ -152,6 +152,19 @@ void fillTriangle(u_char colMin, u_char rowMin, u_char width, u_char height, u_i
   }
 }
 
+void redrawTurtle(u_char ofc, u_char ofr) {
+  u_char col = 0;
+  u_char row = 0;
+  while (row < 16) {
+    col = 0;
+    while (col < 16) {
+      drawPixel(col+ofc, row+ofr, COLOR_BLUE);
+      col++;
+    }
+    row++;
+  }
+}//end redrawTurtle
+
 void drawTurtle(u_char ofc, u_char ofr) {
   u_char col = 0;
   u_char row = 0;
@@ -159,7 +172,7 @@ void drawTurtle(u_char ofc, u_char ofr) {
     col = 0;
     while (col < 16) {
       if (turtle[row][col] == 0) {
-	drawPixel(col+ofc, row+ofr, COLOR_WHITE);
+	drawPixel(col+ofc, row+ofr, COLOR_BLUE);
       }
       else if (turtle[row][col] == 1) {
 	drawPixel(col+ofc, row+ofr, COLOR_DARK_GREEN);
@@ -176,35 +189,46 @@ void drawTurtle(u_char ofc, u_char ofr) {
   }
 }//end turtle
 
-  void drawTree() {
+void drawTopTri(u_char row, u_char col) {
+  u_char my_row, my_col;
+  u_char middle = 10;
+  for (my_row = 0; my_row <= 10; row++) {
+    for (my_col = 10; my_col <= row; col++) {
+      drawPixel(middle+my_col+55+col, my_row+60+row, COLOR_GREEN);
+      drawPixel(middle-my_col+55+col, my_row+60+row, COLOR_GREEN);
+    }
+  }
+}
+
+void drawTree(u_char off_row, u_char off_col) {
     u_char row;
     u_char col;
-    u_char middle;
+    u_char middle = 10;
 
     for (row = 0; row <= 10; row++) {
       for (col=0; col<= row; col++) {
-	drawPixel(middle+col+55, row+60, COLOR_GREEN);
-	drawPixel(middle-col+55, row+60, COLOR_GREEN);
+	drawPixel(middle+col+55+off_col, row+60+off_row, COLOR_GREEN);
+	drawPixel(middle-col+55+off_col, row+60+off_row, COLOR_GREEN);
       }
     }
     //middle
     for(row = 0; row <= 20; row++){
       for(col = 0; col <= row; col++){
-	drawPixel(middle+col+55, row+65, COLOR_GREEN);
-	drawPixel(middle-col+55, row+65, COLOR_GREEN);
+	drawPixel(middle+col+55+off_col, row+65+off_row, COLOR_GREEN);
+	drawPixel(middle-col+55+off_col, row+65+off_row, COLOR_GREEN);
       }
     }
     //bottom
     for(row = 0; row <= 30; row++){
       for(col = 0; col <= row; col++){
-	drawPixel(middle+col+55, row+73, COLOR_GREEN);
-	drawPixel(middle-col+55, row+73, COLOR_GREEN);
+	drawPixel(middle+col+55+off_col, row+73+off_row, COLOR_GREEN);
+	drawPixel(middle-col+55+off_col, row+73+off_row, COLOR_GREEN);
       }
     }
     //bark
     for(row = 0; row <= 10; row++){
       for(col = 0; col <= 10; col++){
-	drawPixel(col+60, row+104, COLOR_BROWN);
+	drawPixel(col+60+off_col, row+104+off_row, COLOR_BROWN);
       }
     }
   }//end tree
