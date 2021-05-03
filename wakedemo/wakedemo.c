@@ -2,6 +2,10 @@
 #include <libTimer.h>
 #include "lcdutils.h"
 #include "lcddraw.h"
+#include "buzzer.h"
+#include "p2switches.h"
+#include "stateMachines.h"
+#include "led.h"
 
 #define LED_GREEN BIT6             // P1.6
 
@@ -43,6 +47,8 @@ void main()
   P1OUT |= LED_GREEN;
   configureClocks();
   lcd_init();
+  buzzer_init();
+  p2sw_init(15);
   
   enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
@@ -51,11 +57,26 @@ void main()
   while (1) {			/* forever */
     if (redrawScreen) { //we redraw screen if needed
       redrawScreen = 0;
-      // drawString5x7(20,20, "hello", fontFgColor, COLOR_BLUE);
+      drawString5x7(50,20, "Demetrius Hernandez", fontFgColor, COLOR_WHITE);
       redrawTurtle(20,shapeCol);
       drawTurtle(20,nextShapeCol);
-      //drawTree(10,shapeCol);
+      
       shapeCol = nextShapeCol;
+
+      switch(button_state) {
+      case 1:
+	buzzer_set_period(2000);
+	break;
+      case 2:
+	myTestMethod();
+	break;
+      case 3:
+	reset();
+	break;
+      case 4:
+	buzzer_set_period(2000);
+	break;
+      }//end switch
     }
     P1OUT &= ~LED_GREEN;	/* green off */
     or_sr(0x10);		/**< CPU OFF */
