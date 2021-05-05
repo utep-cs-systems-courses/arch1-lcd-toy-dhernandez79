@@ -5,6 +5,9 @@
 #include "lcdutils.h"
 #include "lcddraw.h"
 
+static int state = 0;
+static int note = 0;
+
 char toggle_red()/* always toggle! */
 {
   static char state = 0;
@@ -67,4 +70,32 @@ void reset(){
   green_on = 0;
   led_changed = 1;
   led_update();
+}
+
+void assembly_stuff() {
+  switch(state) {
+  case 0:
+    assembly_method(0);
+    state++;
+    break;
+  case 1:
+    assembly_method(1);
+    state++;
+    break;
+  case 2:
+    assembly_method(2);
+    state++;
+    break;
+  case 3:
+    assembly_method(3);
+    state++;
+    break;
+  default:
+    state++;
+    break;
+  }//end switch
+}//end assembly call
+
+void play_buzzer(short note) {
+  buzzer_set_period(2000000/note);
 }

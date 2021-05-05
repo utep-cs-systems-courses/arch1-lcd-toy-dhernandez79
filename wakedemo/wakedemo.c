@@ -71,10 +71,10 @@ void main()
 	myTestMethod();
 	break;
       case 3:
-	reset();
+	assembly_stuff();
 	break;
       case 4:
-	buzzer_set_period(2000);
+	reset();
 	break;
       }//end switch
     }
