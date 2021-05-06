@@ -175,13 +175,13 @@ void drawTurtle(u_char ofc, u_char ofr) {
 	drawPixel(col+ofc, row+ofr, COLOR_BLUE);
       }
       else if (turtle[row][col] == 1) {
-	drawPixel(col+ofc, row+ofr, COLOR_DARK_GREEN);
+	drawPixel(col+ofc, row+ofr, COLOR_BLACK);
       }
       else if (turtle[row][col] == 2) {
 	drawPixel(col+ofc, row+ofr, COLOR_SPRING_GREEN);
       }
       else if (turtle[row][col] == 3) {
-	drawPixel(col+ofc, row+ofr, COLOR_BLACK);
+	drawPixel(col+ofc, row+ofr, COLOR_WHITE);
       }
       col++;
     }
